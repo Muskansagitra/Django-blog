@@ -1,0 +1,27 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<div class="container my-5">
+   
+
+<h2 class="text-center"><span class="border-bottom"> Dashboard/Addpost</span>
+   </h2>
+{% if messages %}
+{% for message in messages %}
+<h5 {% if message.tags %} class="alert alert-{{message.tags}} text-center mt-3 " {% endif %}>{{message}}</h5>
+{% endfor %}
+{% endif %}
+
+
+    <div class="row">
+        <div class="col-sm-6 offset-sm-3">
+    <form  action="" method="POST" novalided>
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Add" class="btn btn-success">
+        <a href="{%  url 'dashbord' %}" class="btn btn-danger">Cancel</a>
+
+    </form>
+        </div>
+    </div>
+</span>  
+{% endblock %}

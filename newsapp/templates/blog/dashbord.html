@@ -1,0 +1,61 @@
+{% extends "blog/base.html" %}
+{% load static %}
+<div class="container ">
+    <div class="row ">
+{% block msg %}
+{% if messages %}
+{% for message in messages %}
+<p {% if message.tag %} class="alert alert-{{message.tag}}" {% endif %}>{{message}}</p>
+{% endfor %}
+{% endif %}
+{% endblock msg %}
+
+
+{% block side %}
+ <div class="col-sm-2 text-white my-5 text-center">
+    <h3>Profile</h3>
+    <h5>{{full_name}}</h5>
+    {% for group in groups %}
+    <p>{{group.name}}</p>
+    {% endfor %}
+</div>
+{% endblock side %}
+
+{% block content %}
+<div class="col-sm-10 my-5">
+    <h1 >Dashboard</h1>
+    <hr>
+    <a href="{% url 'addpost' %}" class="btn btn-success mb-3"> Add Post</a>
+    <table class="table  bg-light">
+        <h4 class="alert alert-success text-center">Show Post Information</h4>
+        {% if posts %}
+        <thead>
+            <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Action</th>
+
+        </tr>
+        </thead>
+        <tbody>
+            {% for post in posts %}
+            <tr>
+                <td>{{post.id}}</td>
+                <td>{{post.title}}</td>
+                <td>{{post.description}}</td>
+                <td><a href ="{% url 'edit' post.id %}"class="btn btn-warning" type="submit">Edit</a></td>
+                {% if perms.newsblog.delete_post %}
+                <td><a href ="{% url 'delete' post.id %}"class="btn btn-danger" type="submit">Delete</a></td>
+               {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>          
+    </table>
+    {% else%}
+    <h4 class="alert alert-danger text-center"> NO Data</h4>
+    {% endif %}
+</div>
+    </div>
+</div>
+{% endblock %}

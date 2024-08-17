@@ -1,0 +1,18 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+<h1>Home</h1>
+
+<div class="container-fluid py-5">
+
+  {% for post in posts %}
+    <h3 class="display-6 fw-bold mb-3">{{post.title}}</h3>
+
+    <p class="col-md-8 fs-6">{{post.description}}</p>
+    <button class="btn btn-primary  btn-lg" type="button">Read More</button>
+    <hr>
+  {% endfor %}
+  </div>
+</div>
+{% endblock %}

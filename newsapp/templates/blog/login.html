@@ -1,0 +1,28 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% block content %}
+<div class="container my-3">
+<div class="row">
+    <div class="col-sm-6 offset-sm-3 shadow">
+    <h1>Login</h1>
+<hr>
+    <form method="POST" action="">
+        {% csrf_token%}
+       {% for form in form %}
+       <div class="form-group">
+       {{form.label_tag}}{{form}}{{form.errors|striptags}}
+       </div>
+       {% endfor %}
+       <input type="submit" class="btn btn-primary my-3" value="Login">
+        {% if form.non_field_errors %}
+        {% for error in form.non_field_errors%}
+        <p class="alert  alert-warning">{{error}}</p>
+        {% endfor %}
+        {% endif %}
+    </form>
+    
+
+    </div>
+</div>
+</div>
+{% endblock %}
